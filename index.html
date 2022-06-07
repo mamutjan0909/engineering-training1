@@ -18,18 +18,42 @@
             background: #aaaaaa;
         }
 
+        ul {
+            margin: 50px;
+            border: 1px solid black;
+            padding: 0px;
+            
+        }
+
         ul>li {
             list-style-type: none;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            font-family: Helvetica;
+            text-align: left;
         }
-        .grid-columns{
+ 
+        li:nth-child(10) {
+            border-bottom: 0px solid black;
+    
+        }
+        li:nth-child(3n) {
+            border-right: 0px solid black;
+    
+        }
+
+        .grid-columns {
             display: grid;
             grid-template-columns: 7fr 4fr 4fr;
-        };
+        }
+
+        ;
     </style>
     <title>Engineering-training</title>
 </head>
 
 <body>
+
     <div class="logo"><img
             src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"
             alt="Total Wine & More"></div>
