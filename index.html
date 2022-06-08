@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Engineering-training</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -22,7 +23,7 @@
             margin: 50px;
             border: 1px solid black;
             padding: 0px;
-            
+
         }
 
         ul>li {
@@ -32,24 +33,64 @@
             font-family: Helvetica;
             text-align: left;
         }
- 
+
         li:nth-child(10) {
             border-bottom: 0px solid black;
-    
+
         }
+
         li:nth-child(3n) {
             border-right: 0px solid black;
-    
+
         }
 
         .grid-columns {
             display: grid;
-            grid-template-columns: 7fr 4fr 4fr;
+            grid-template-columns: 1fr 1fr 1fr;
         }
 
-        ;
+        @media screen and (max-width: 64em) {
+            .grid-columns {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            @media screen and (max-width: 64em) {
+                .grid-item {
+
+
+                    padding: 20px;
+
+
+                }
+
+            }
+
+            @media screen and (max-width: 64em) {
+                .grid-item:nth-child(2n-4) {
+                    
+                    border-right: 0px solid black;}
+                    @media screen and (max-width: 64em) {
+                .grid-item:nth-child(3n-5) {
+                    
+                    border-right: 0px solid black;}
+                    .grid-item:nth-child(5) {
+                    
+                    border-right: 0px solid black;}
+
+                @media screen and (max-width: 64em) {
+                    .logo {
+                        margin: 20px;
+                        border-radius: 15px;
+
+                    }
+                }
+            }
+
+
+            ;
     </style>
-    <title>Engineering-training</title>
+
 </head>
 
 <body>
