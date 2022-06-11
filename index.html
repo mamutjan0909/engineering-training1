@@ -13,11 +13,10 @@
     <style>
         .logo {
             width: 100px;
+            margin: 20px;
         }
 
-        li:hover {
-            background: #aaaaaa;
-        }
+
 
         ul {
             margin: 50px;
@@ -55,50 +54,127 @@
                 grid-template-columns: 1fr;
             }
 
-            @media screen and (max-width: 64em) {
-                .grid-item {
+
+            .grid-item {
 
 
-                    padding: 20px;
+                padding: 20px;
 
-
-                }
 
             }
 
-            @media screen and (max-width: 64em) {
-                .grid-item:nth-child(2n-4) {
-
-                    border-right: 0px solid black;
-                }
-
-                @media screen and (max-width: 64em) {
-                    .grid-item:nth-child(3n-5) {
-
-                        border-right: 0px solid black;
-                    }
-
-                    .grid-item:nth-child(5) {
-
-                        border-right: 0px solid black;
-                    }
-
-                    @media screen and (max-width: 64em) {
-                        .logo {
-                            margin: 20px;
-                            border-radius: 15px;
-
-                        }
-                    }
-                }
 
 
-                ;
+
+            .grid-item:nth-child(2n-4) {
+
+                border-right: 0px solid black;
+            }
+
+            .grid-item:nth-child(3n-5) {
+
+                border-right: 0px solid black;
+            }
+
+            .grid-item:nth-child(5) {
+
+                border-right: 0px solid black;
+            }
+
+
+            .logo {
+                margin: 20px;
+                border-radius: 15px;
+
+            }
+        }
+
+
+
+        .background-container {
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .popup-container {
+            display: flex;
+            justify-content: center;
+
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            margin: auto;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            position: relative;
+
+
+
+        }
+
+        .spinner-container {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            position: relative;
+            top: 42%;
+            left: 12%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bi-arrow-clockwise {
+
+            margin: 0;
+            position: relative;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .loadingtext {
+            margin: 0;
+            position: relative;
+            top: 100%;
+            left: 12%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            font-family: helvetica;
+            font-weight: bold;
+        }
     </style>
 
 </head>
 
 <body>
+    <div class="background-container">
+        <div class="popup-container">
+            <div class="spinner-container">
+                <i class="bi bi-arrow-clockwise"></i>
+
+            </div>
+            <span class="loadingtext">Loading...</span>
+        </div>
+    </div>
 
     <div class="logo"><img
             src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"
