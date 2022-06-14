@@ -2,72 +2,78 @@
 <html>
 
 <head>
-    <title>Engineering-training</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <title>Engineering-training</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+                crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="styles.css">
 
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+
+
 
 </head>
 
 <body>
+        <button type="button" id="modalButton">Open Modal</button>
+        <div class="hidden">
+                <div class="popup-container">
+                        <div class="spinner-container">
+                                <i class="bi bi-arrow-clockwise"></i>
 
-    <div class="hidden">
-        <div class="popup-container">
-            <div class="spinner-container">
-                <i class="bi bi-arrow-clockwise"></i>
-
-            </div>
-            <span class="loadingtext">Loading...</span>
+                        </div>
+                        <span class="loadingtext">Loading...</span>
+                </div>
         </div>
-    </div>
 
-    <div class="logo"><img
-            src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"
-            alt="Total Wine & More"></div>
-    <ul class="grid-columns">
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70749">
-                Create and publish a public repository in GitHub under your personal account named 'Engineering
-                Training'</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70771">
-                Create index.html with basic html markup and perform first commit</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70804">
-                Add anchor tags for each completed subtasks</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70805">
-                Make unordered list of anchor tags</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70905">
-                Add the TWM logo as an image to the beginning of the body of the page</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70918">
-                Add style attributes to img tag to setting the height and width of the logo</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-70993">
-                Add a head, add a style tag to the head, add a class to style tag, move logo styles to style tag, remove
-                inline styles from logo, add class to the logo</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-71030">
-                Add a selector inside style tag that targets the list items and removes the bullet</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-71062">
-                Pseudo-selectors - Add hover styling to list elements</a></li>
-        <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
-                href="https://totalwine.atlassian.net/browse/DIG-71085">
-                UI Libraries - Add Bootstrap to your page, add check icons to your list, and convert your list into a
-                bootstrap list-group</a></li>
+        <div class="logo"><img
+                        src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"
+                        alt="Total Wine & More"></div>
+        <ul class="grid-columns">
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70749">
+                                Create and publish a public repository in GitHub under your personal account named
+                                'Engineering
+                                Training'</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70771">
+                                Create index.html with basic html markup and perform first commit</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70804">
+                                Add anchor tags for each completed subtasks</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70805">
+                                Make unordered list of anchor tags</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70905">
+                                Add the TWM logo as an image to the beginning of the body of the page</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70918">
+                                Add style attributes to img tag to setting the height and width of the logo</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70993">
+                                Add a head, add a style tag to the head, add a class to style tag, move logo styles to
+                                style tag, remove
+                                inline styles from logo, add class to the logo</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71030">
+                                Add a selector inside style tag that targets the list items and removes the bullet</a>
+                </li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71062">
+                                Pseudo-selectors - Add hover styling to list elements</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71085">
+                                UI Libraries - Add Bootstrap to your page, add check icons to your list, and convert
+                                your list into a
+                                bootstrap list-group</a></li>
 
 
-    </ul>
+        </ul>
+        <script src="script.js"></script>
 </body>
 
 </html>
