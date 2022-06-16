@@ -156,3 +156,13 @@
     .hidden {
         display: none;
     }
+    .closeModal{
+        margin: 0;
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-family: helvetica;
+        font-weight: bold;
+    }
