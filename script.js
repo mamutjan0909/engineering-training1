@@ -94,9 +94,10 @@ const nameOfArrayOfObjects = [
 
 ];
 var jirasArray = [];
-for (var i = 0; i < nameOfArrayOfObjects.length; i++) {
+for (let i = 0; i < nameOfArrayOfObjects.length; i++) {
     jirasArray.push(nameOfArrayOfObjects[i]);
 }
+
 console.log(jirasArray);
 
 
