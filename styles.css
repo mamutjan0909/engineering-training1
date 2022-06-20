@@ -22,7 +22,9 @@
         font-family: Helvetica;
         text-align: left;
     }
-
+    li:hover {
+        background: #aaaaaa;
+    }
     li:nth-child(10) {
         border-bottom: 0px solid black;
 
