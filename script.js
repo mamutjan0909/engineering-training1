@@ -19,7 +19,6 @@ function whenCloseClicked() {
     const modalContainer = document.getElementById("modal");
     modalContainer.classList.toggle("hidden");
 }
-
 const nameOfArrayOfObjects = [
     {
 
@@ -99,6 +98,7 @@ for (let i = 0; i < nameOfArrayOfObjects.length; i++) {
 }
 
 console.log(jirasArray);
+
 
 
 
