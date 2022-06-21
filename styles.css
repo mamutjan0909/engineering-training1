@@ -9,7 +9,7 @@
 
     ul {
         margin: 50px;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         padding: 0px;
 
     }
@@ -35,13 +35,13 @@
 
     }
 
-    .grid-columns {
+    .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
 
     @media screen and (max-width: 64em) {
-        .grid-columns {
+        .grid-container {
             display: grid;
             grid-template-columns: 1fr;
         }

@@ -52,11 +52,10 @@ for (let index = 0; index < titles.length; index++) {
         links: links[index],
     });
 }
+var list = document.getElementsByClassName("grid-container");
 
-console.log(jirasArray);
-
-
-
-
-
-
+jirasArray.forEach(element => {
+  console.log(element); 
+  var listElement = document.createElement("li");
+list[0].prepend(listElement);
+});
