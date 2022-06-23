@@ -8,6 +8,7 @@ function whenClicked() {
   const modalContainer = document.getElementById("modal");
   modalContainer.classList.toggle("hidden");
   console.log(modalContainer.classList);
+  loadData();
 }
 const closeModalButton = document.getElementsByClassName("closeModal");
 
@@ -61,3 +62,9 @@ jirasArray.forEach((element) => {
   list[0].append(listElement);
   console.log(element);
 });
+
+function loadData() {
+  setTimeout(function () {
+    console.log("Data loaded");
+  }, 1000);
+}
