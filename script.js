@@ -1,5 +1,4 @@
 console.log("Engineering Training!");
-
 const modalButton = document.getElementById("modalButton");
 console.log("modalButton", modalButton);
 modalButton.addEventListener("click", whenClicked);
@@ -13,13 +12,17 @@ function whenClicked() {
 const closeModalButton = document.getElementsByClassName("closeModal");
 
 closeModalButton[0].addEventListener("click", whenCloseClicked);
-
 console.log("closeModal", closeModalButton);
-
 function whenCloseClicked() {
   console.log("Clicked Close!");
   const modalContainer = document.getElementById("modal");
   modalContainer.classList.toggle("hidden");
+}
+function loadData() {
+  setTimeout(function () {
+    renderData();
+    console.log("Data loaded");
+  }, 2000);
 }
 const titles = [
   "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
@@ -45,7 +48,6 @@ const links = [
   "https://totalwine.atlassian.net/browse/DIG-71062",
   "https://totalwine.atlassian.net/browse/DIG-71085",
 ];
-
 const jirasArray = [];
 for (let index = 0; index < titles.length; index++) {
   jirasArray.push({
@@ -54,17 +56,12 @@ for (let index = 0; index < titles.length; index++) {
   });
 }
 const list = document.getElementsByClassName("grid-container");
-
-jirasArray.forEach((element) => {
-  const listElement = document.createElement("li");
-  listElement.innerHTML = `<li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+function renderData() {
+  jirasArray.forEach((element) => {
+    const listElement = document.createElement("li");
+    listElement.innerHTML = `<li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
     href="${element.link}">${element.title}</a></li>`;
-  list[0].append(listElement);
-  console.log(element);
-});
-
-function loadData() {
-  setTimeout(function () {
-    console.log("Data loaded");
-  }, 1000);
+    list[0].append(listElement);
+  });
+  whenCloseClicked();
 }
