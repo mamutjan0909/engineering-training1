@@ -20,21 +20,20 @@ function whenCloseClicked() {
 }
 let dataLoaded = false;
 
-function loadData() { 
-  if (dataLoaded){
+function loadData() {
+  if (dataLoaded) {
     console.log("Date Already Loaded");
-    return 
+    return;
   }
   whenClicked();
 
-  setTimeout(function() {
-
-  renderData().then((response)=>{
-    dataLoaded = true;
-    list[0].innerHTML = response;
-    whenCloseClicked();
-    return response;
-}) 
+  setTimeout(function () {
+    renderData().then((response) => {
+      dataLoaded = true;
+      list[0].innerHTML = response;
+      whenCloseClicked();
+      return response;
+    });
     console.log("Data loaded");
   }, 2000);
 }
@@ -73,13 +72,13 @@ const list = document.getElementsByClassName("grid-container");
 function renderData() {
   return new Promise((resolve) => {
     let response = "";
-      jirasArray.forEach(element => { 
-        const {link, title } = element;
-          response += `<li class="item"><a href= ${link}> 
+    jirasArray.forEach((element) => {
+      //const { link, title } = element;
+      response += `<li class="item"><a href= ${element.link}> 
       <i class="bi bi-check-circle-fill">
-      </i> ${title} 
+      </i> ${element.title} 
       </a></li>`;
-      });
-      resolve(response);
-  })  
+    });
+    resolve(response);
+  });
 }
