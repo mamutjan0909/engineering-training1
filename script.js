@@ -21,7 +21,7 @@ function whenCloseClicked() {
 let dataLoaded = false;
 
 function loadData() {
-  if (dataLoaded) {
+  if (dataLoaded == true) {
     console.log("Date Already Loaded");
     return;
   }
