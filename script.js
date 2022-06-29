@@ -73,10 +73,10 @@ function renderData() {
   return new Promise((resolve) => {
     let response = "";
     jirasArray.forEach((element) => {
-      //const { link, title } = element;
-      response += `<li class="item"><a href= ${element.link}> 
+      const { link, title } = element;
+      response += `<li class="item"><a href= ${link}> 
       <i class="bi bi-check-circle-fill">
-      </i> ${element.title} 
+      </i> ${title} 
       </a></li>`;
     });
     resolve(response);
