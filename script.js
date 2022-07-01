@@ -1,42 +1,27 @@
 console.log("Engineering Training!");
-const modalButton = document.getElementById("modalButton");
-console.log("modalButton", modalButton);
-modalButton.addEventListener("click", loadData);
-function whenClicked() {
-  console.log("Clicked!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-  console.log(modalContainer.classList);
-  //loadData();
-}
-const closeModalButton = document.getElementsByClassName("closeModal");
 
-closeModalButton[0].addEventListener("click", whenCloseClicked);
-console.log("closeModal", closeModalButton);
-function whenCloseClicked() {
-  console.log("Clicked Close!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-}
-let dataLoaded = false;
+// let dataLoaded = false;
 
-function loadData() {
-  if (dataLoaded == true) {
-    console.log("Date Already Loaded");
-    return;
-  }
-  whenClicked();
+// function loadData() {
 
-  setTimeout(function () {
-    renderData().then((response) => {
-      dataLoaded = true;
-      list[0].innerHTML = response;
-      whenCloseClicked();
-      return response;
-    });
-    console.log("Data loaded");
-  }, 2000);
-}
+//   whenClicked();
+
+//   setTimeout(function () {
+
+//     renderData().then((response) => {
+//       dataLoaded = true;
+//       list[0].innerHTML = response;
+//       whenCloseClicked();
+//       return response;
+//     });
+//     console.log("Data loaded");
+//   }, 2000);
+
+//   if (dataLoaded == true) {
+//     console.log("Date Already Loaded");
+//     return;
+//   }
+// }
 const titles = [
   "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
   "Create index.html with basic html markup and perform first commit",
@@ -69,16 +54,73 @@ for (let index = 0; index < titles.length; index++) {
   });
 }
 const list = document.getElementsByClassName("grid-container");
-function renderData() {
-  return new Promise((resolve) => {
-    let response = "";
-    jirasArray.forEach((element) => {
-      const { link, title } = element;
-      response += `<li class="item"><a href= ${link}> 
-      <i class="bi bi-check-circle-fill">
-      </i> ${title} 
-      </a></li>`;
+
+// function renderData() {
+//   return new Promise((resolve) => {
+//     let response = "";
+//     jirasArray.forEach((element) => {
+//       const { link, title } = element;
+//       response += `<li class="item"><a href= ${link}>
+//       <i class="bi bi-check-circle-fill">
+//       </i> ${title}
+//       </a></li>`;
+//     });
+//     resolve(response);
+//   });
+// }
+let dataLoaded = false;
+
+const utils = {
+  renderData: function () {
+    return new Promise((resolve) => {
+      let response = "";
+      jirasArray.forEach((element) => {
+        const { link, title } = element;
+        response += `<li class="item"><a href= ${link}>
+              <i class="bi bi-check-circle-fill">
+              </i> ${title}
+              </a></li>`;
+      });
+      resolve(response);
     });
-    resolve(response);
-  });
+  },
+
+  loadData: function () {
+    if (dataLoaded == true) {
+      console.log("Date Already Loaded");
+      return;
+    }
+    //whenClicked();
+
+    this.renderData().then(function (response) {
+      setTimeout(function () {
+        list[0].innerHTML = response;
+        whenCloseClicked();
+        return response;
+      }, 2000);
+    });
+  },
+};
+const modalButton = document.getElementById("modalButton");
+modalButton.addEventListener("click",function () {
+  
+
+utils.loadData()
+});
+
+
+
+function whenClicked() {
+  console.log("Clicked!");
+  const modalContainer = document.getElementById("modal");
+  modalContainer.classList.toggle("hidden");
+  console.log(modalContainer.classList);
 }
+
+function whenCloseClicked() {
+  console.log("Clicked Close!");
+  const modalContainer = document.getElementById("modal");
+  modalContainer.classList.toggle("hidden");
+}
+const closeModalButton = document.getElementsByClassName("closeModal");
+closeModalButton[0].addEventListener("click", whenCloseClicked);
