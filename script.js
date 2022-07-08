@@ -80,18 +80,23 @@ function whenCloseClicked() {
 const closeModalButton = document.getElementsByClassName("closeModal");
 closeModalButton[0].addEventListener("click", whenCloseClicked);
 
+const jirasArray = [];
 class JiraHandler {
   constructor(links, titles) {
     this.links = links;
     this.titles = titles;
+    this.jirasObject = [];
+    this.creatJiraObject();
+  }
+  creatJiraObject(){
+    for (let index = 0; index < titles.length; index++) {
+      jirasArray.push({
+        title: titles[index],
+        link: links[index],
+      });
   }
 }
-
+};
 const jiraHandler = new JiraHandler(links, titles);
-const jirasArray = [];
-for (let index = 0; index < titles.length; index++) {
-  jirasArray.push({
-    title: titles[index],
-    link: links[index],
-  });
-}
+
+
