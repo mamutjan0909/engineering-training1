@@ -97,9 +97,9 @@ class JiraHandler {
     };
     for (let index = 0; index < titles.length; index++) {
       jirasArray.push({
-        title: titles[index],
-        link: links[index],
-        ...jiraTemplate
+        title : this = titles[index],
+        link : this = links[index],
+        ...jiraTemplate,
       });
     }
   }
