@@ -81,6 +81,9 @@ const closeModalButton = document.getElementsByClassName("closeModal");
 closeModalButton[0].addEventListener("click", whenCloseClicked);
 
 const jirasArray = [];
+const jiraTemplate = {
+  icon: "bi bi-check-circle-fill",
+};
 class JiraHandler {
   constructor(links, titles) {
     this.links = links;
@@ -88,15 +91,17 @@ class JiraHandler {
     this.jirasObject = [];
     this.creatJiraObject();
   }
-  creatJiraObject(){
+  creatJiraObject() {
+    const jiraTemplate = {
+      icon: "bi bi-check-circle-fill",
+    };
     for (let index = 0; index < titles.length; index++) {
       jirasArray.push({
         title: titles[index],
         link: links[index],
+        ...jiraTemplate
       });
+    }
   }
 }
-};
 const jiraHandler = new JiraHandler(links, titles);
-
-
