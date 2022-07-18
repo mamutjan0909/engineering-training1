@@ -34,9 +34,9 @@ const utils = {
     return new Promise((resolve) => {
       let response = "";
       jirasArray.forEach((element) => {
-        const { link, title } = element;
-        response += `<li class="item"><a href= ${link}>
-              <i class="bi bi-check-circle-fill">
+        const { link, title, icon} = element;
+        response += `<li class="item"><a href="${link}">
+              <i class="${icon}">
               </i> ${title}
               </a></li>`;
       });
@@ -97,9 +97,9 @@ class JiraHandler {
     };
     for (let index = 0; index < titles.length; index++) {
       jirasArray.push({
-        title : this = titles[index],
-        link : this = links[index],
-        ...jiraTemplate,
+        title: this.titles[index],
+        link: this.links[index],
+        ...jiraTemplate
       });
     }
   }
