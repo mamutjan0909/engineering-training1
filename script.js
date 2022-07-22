@@ -29,12 +29,64 @@ const list = document.getElementsByClassName("grid-container");
 
 let dataLoaded = false;
 
+const modalButton = document.getElementById("modalButton");
+
+function whenClicked() {
+  console.log("Clicked!");
+  const modalContainer = document.getElementById("modal");
+  modalContainer.classList.toggle("hidden");
+  console.log(modalContainer.classList);
+}
+
+function whenCloseClicked() {
+  console.log("Clicked Close!");
+  const modalContainer = document.getElementById("modal");
+  modalContainer.classList.toggle("hidden");
+}
+const closeModalButton = document.getElementsByClassName("closeModal");
+closeModalButton[0].addEventListener("click", whenCloseClicked);
+
+let jiraTemplate = {
+  icon: "bi bi-check-circle-fill",
+};
+let errorJiraTemplate = {
+  icon: "bi bi-x-circle",
+};
+function getRandomNum(max) {
+  return Math.floor(Math.random() * max);
+}
+function getIcon() {
+  let rNum = getRandomNum(3);
+  console.log(rNum, rNum >= 1);
+  return rNum >= 1 ? jiraTemplate : errorJiraTemplate;
+}
+class JiraHandler {
+  constructor(links, titles) {
+    this.links = links;
+    this.titles = titles;
+    this.jirasObject = [];
+    this.creatJiraObject();
+  }
+  creatJiraObject() {
+    for (let index = 0; index < this.titles.length; index++) {
+      let icon = getIcon();
+      this.jirasObject.push({
+        title: this.titles[index],
+        link: this.links[index],
+        ...icon,
+      });
+    }
+  }
+}
+
+const jiraHandler = new JiraHandler(links, titles);
 const utils = {
   renderData: function () {
     return new Promise((resolve) => {
       let response = "";
-      jirasArray.forEach((element) => {
-        const { link, title, icon} = element;
+      console.log(jiraHandler.jirasObject);
+      jiraHandler.jirasObject.forEach((element) => {
+        const { link, title, icon } = element;
         response += `<li class="item"><a href="${link}">
               <i class="${icon}">
               </i> ${title}
@@ -60,48 +112,6 @@ const utils = {
     });
   },
 };
-const modalButton = document.getElementById("modalButton");
 modalButton.addEventListener("click", function () {
   utils.loadData();
 });
-
-function whenClicked() {
-  console.log("Clicked!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-  console.log(modalContainer.classList);
-}
-
-function whenCloseClicked() {
-  console.log("Clicked Close!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-}
-const closeModalButton = document.getElementsByClassName("closeModal");
-closeModalButton[0].addEventListener("click", whenCloseClicked);
-
-const jirasArray = [];
-const jiraTemplate = {
-  icon: "bi bi-check-circle-fill",
-};
-class JiraHandler {
-  constructor(links, titles) {
-    this.links = links;
-    this.titles = titles;
-    this.jirasObject = [];
-    this.creatJiraObject();
-  }
-  creatJiraObject() {
-    const jiraTemplate = {
-      icon: "bi bi-check-circle-fill",
-    };
-    for (let index = 0; index < titles.length; index++) {
-      jirasArray.push({
-        title: this.titles[index],
-        link: this.links[index],
-        ...jiraTemplate
-      });
-    }
-  }
-}
-const jiraHandler = new JiraHandler(links, titles);
