@@ -25,27 +25,6 @@ const links = [
   "https://totalwine.atlassian.net/browse/DIG-71085",
 ];
 
-const list = document.getElementsByClassName("grid-container");
-
-let dataLoaded = false;
-
-const modalButton = document.getElementById("modalButton");
-
-function whenClicked() {
-  console.log("Clicked!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-  console.log(modalContainer.classList);
-}
-
-function whenCloseClicked() {
-  console.log("Clicked Close!");
-  const modalContainer = document.getElementById("modal");
-  modalContainer.classList.toggle("hidden");
-}
-const closeModalButton = document.getElementsByClassName("closeModal");
-closeModalButton[0].addEventListener("click", whenCloseClicked);
-
 let jiraTemplate = {
   icon: "bi bi-check-circle-fill",
 };
@@ -80,38 +59,60 @@ class JiraHandler {
 }
 
 const jiraHandler = new JiraHandler(links, titles);
+function initModalButton() {
+  var dataLoaded = false;
+  const openModalButton = document.getElementById("modalButton");
+  openModalButton.addEventListener("click", () => {
+    if (dataLoaded === true) {
+      return;
+    }
+    utils.loadData(() => {
+      dataLoaded = true;
+    });
+  });
+}
+initModalButton();
 const utils = {
+  loadData: function (callback) {
+    setTimeout(toggleFunction, 1000);
+
+    setTimeout(() => {
+      this.renderData().then((response) => {
+        list[0].innerHTML = response;
+
+        return response;
+      });
+    }, 2000);
+    callback();
+
+    setTimeout(() => {
+      let modalContainer = document.getElementById("modal");
+      modalContainer.classList.add("hidden");
+    }, 4000);
+  },
   renderData: function () {
-    return new Promise((resolve) => {
-      let response = "";
-      console.log(jiraHandler.jirasObject);
+    let response = "";
+    return new Promise((resolve, reject) => {
       jiraHandler.jirasObject.forEach((element) => {
-        const { link, title, icon } = element;
-        response += `<li class="item"><a href="${link}">
-              <i class="${icon}">
-              </i> ${title}
-              </a></li>`;
+        let { link, title, icon } = element;
+        console.log(icon);
+        response += `<li class="item"><a href= ${link}> 
+          <i class="${icon}">
+          </i> ${title} 
+          </a></li>`;
       });
       resolve(response);
     });
   },
-
-  loadData: function () {
-    if (dataLoaded == true) {
-      console.log("Date Already Loaded");
-      return;
-    }
-    whenClicked();
-
-    this.renderData().then(function (response) {
-      setTimeout(function () {
-        list[0].innerHTML = response;
-        whenCloseClicked();
-        return response;
-      }, 2000);
-    });
-  },
 };
-modalButton.addEventListener("click", function () {
-  utils.loadData();
-});
+function toggleFunction() {
+  let modalContainer = document.getElementById("modal");
+  modalContainer.classList.toggle("hidden");
+}
+const openModalButton = document.getElementById("modalButton");
+const closeModalButton = document.getElementsByClassName("closeModal");
+const list = document.getElementsByClassName("grid-container");
+
+closeModalButton.item(0).addEventListener("click", toggleFunction);
+console.log("modalButton", openModalButton);
+console.log("closeModalButton", closeModalButton);
