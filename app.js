@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
 });
 
 app.use("/", router);
+app.use(express.static('public'));
 app.listen(port, () => {
   console.log(`Engineer Training app listening on port ${port}`);
 });
