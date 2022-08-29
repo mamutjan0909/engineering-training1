@@ -7,6 +7,10 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+router.get("/getJiraTickets", (req, res) => {
+  res.json({"jirasObject":[]});
+});
+
 app.use("/", router);
 app.use(express.static('public'));
 app.listen(port, () => {
