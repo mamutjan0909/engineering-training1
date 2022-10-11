@@ -7,39 +7,36 @@
       const modalButton = document.getElementById("modalButton");
       modalButton.addEventListener("click", () => {
         if (dataLoaded === false) {
-          resolve();
+          utils.loadData(() => {
+            resolve();
+            dataLoaded = true;
+          });
         }
       });
-    })
-      .then(utils.loadData(() => {
-        dataLoaded = true;
-      }));
+    });
   }
 
   const utils = {
     loadData: async function (callback) {
+      whenCloseClicked();
       const response = await fetch("/getJiraTickets");
       const data = await response.json();
       console.log(data);
-      setTimeout(whenCloseClicked, 1000);
 
-      setTimeout(() => {
-        this.renderData().then((response) => {
-          list[0].innerHTML = response;
-          return response;
-        });
-      }, 2000);
+      this.renderData(data).then((response) => {
+        list[0].innerHTML = response;
+        return response;
+      });
+
       callback();
 
-      setTimeout(() => {
-        let modalContainer = document.getElementById("modal");
-        modalContainer.classList.add("hidden");
-      }, 2000)
+      let modalContainer = document.getElementById("modal");
+      modalContainer.classList.add("hidden");
     },
-    renderData: function () {
-      let response = "";
+    renderData: function (data) {
       return new Promise((resolve) => {
-        jiraHandler.jirasObject.forEach((element) => {
+        let response = "";
+        data.jirasObject.forEach((element) => {
           let { link, title, icon } = element;
           response += `<li class="item"><a href= ${link}> 
         <i class="${icon}">

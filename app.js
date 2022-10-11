@@ -1,16 +1,16 @@
-const dataHandler = require('./public/dataHandler')
 const express = require("express");
 const path = require("path");
 const app = express();
 const port = 3000;
 const router = express.Router();
+const dataHandler = require('./dataHandler');
+
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 router.get("/getJiraTickets", (req, res) => {
-  let jirasObject={jirasObject:[]};
-  res.json(jirasObject)
+  res.json({ "jirasObject": dataHandler.jirasObject });
 });
 
 app.use("/", router);
