@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const { Octokit } = require("@octokit/rest");
+const { application } = require('express');
 const titles = [
   "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
   "Create index.html with basic html markup and perform first commit",
@@ -61,4 +65,28 @@ class JiraHandler {
 }
 
 const jiraHandler = new JiraHandler(links, titles);
-module.exports = jiraHandler
+const octokit = new Octokit({ 
+  auth: process.env.GITHUB_TOKEN,
+  baseUrl: 'https://api.github.com',
+  log: {
+      debug: () => {},
+      info: () => {},
+      warn: console.warn,
+      error: console.error
+  },
+  request: {
+      agent: undefined,
+      fetch: undefined,
+      timeout: 0
+  }
+});
+
+octokit.rest.repos.listCommits({
+owner: "Mamutjan0909",
+repo: "engineering-training",
+})
+.then((response) => {
+console.log(response);
+});
+
+module.exports = jiraHandler;
