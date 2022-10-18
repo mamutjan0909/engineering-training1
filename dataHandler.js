@@ -51,6 +51,7 @@ class JiraHandler {
     this.titles = titles;
     this.jirasObject = [];
     this.createJiraObject();
+    this.fetchGitHubData();
   }
   createJiraObject() {
     for (let index = 0; index < this.titles.length; index++) {
@@ -62,31 +63,45 @@ class JiraHandler {
       });
     }
   }
+
+
+  fetchGitHubData() {
+    return new Promise((resolve) => {
+
+      const octokit = new Octokit({
+        auth: process.env.GITHUB_TOKEN,
+      });
+      octokit.rest.repos.listCommits({
+        owner: "aindrokov",
+        repo: "Engineering-Training",
+      })
+        .then((response) => {
+          for (let index = 0; index < response.data.length; index++) {
+            console.log("commit message: " + response.data[index].commit.message);
+          }
+        });
+      resolve();
+    });
+  }
 }
 
+
 const jiraHandler = new JiraHandler(links, titles);
-const octokit = new Octokit({ 
+
+const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
   baseUrl: 'https://api.github.com',
   log: {
-      debug: () => {},
-      info: () => {},
-      warn: console.warn,
-      error: console.error
+    debug: () => { },
+    info: () => { },
+    warn: console.warn,
+    error: console.error
   },
   request: {
-      agent: undefined,
-      fetch: undefined,
-      timeout: 0
+    agent: undefined,
+    fetch: undefined,
+    timeout: 0
   }
-});
-
-octokit.rest.repos.listCommits({
-owner: "Mamutjan0909",
-repo: "engineering-training",
-})
-.then((response) => {
-console.log(response);
 });
 
 module.exports = jiraHandler;
