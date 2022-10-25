@@ -1,7 +1,8 @@
 const { Octokit } = require("@octokit/rest");
 const { application } = require('express');
 const JiraApi = require('jira-client');
-
+require('dotenv').config();
+console.log(process.env);
 const titles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
     "Create index.html with basic html markup and perform first commit",
@@ -109,7 +110,7 @@ jira.findIssue("DIG-72462")
     console.log('Status: ' + issue.fields.status.name);
   })
   .catch(function(err) {
-    console.error(err);
+    console.log(err,Object.keys(err));
   });
 
 module.exports = jiraHandler;
