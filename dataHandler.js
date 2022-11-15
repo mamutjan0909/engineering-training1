@@ -1,8 +1,48 @@
+require("dotenv").config();
 const { Octokit } = require("@octokit/rest");
 const { application } = require('express');
 const JiraApi = require('jira-client');
-require('dotenv').config();
-console.log(process.env);
+
+//console.log(process.env);
+
+const octokit = new Octokit({
+  auth: process.env.GITHUB_TOKEN,
+  baseUrl: 'https://api.github.com',
+  log: {
+    debug: () => { },
+    info: () => { },
+    warn: console.warn,
+    error: console.error
+  },
+  request: {
+    agent: undefined,
+    fetch: undefined,
+    timeout: 0
+  }
+});
+
+var jira = new JiraApi({
+  protocol: 'https',
+  host: 'totalwine.atlassian.net',
+  username: process.env.JIRA_USERNAME,
+  password: process.env.JIRA_TOKEN,
+  apiVersion: '2',
+  strictSSL: true
+});
+
+async function getStatus(issueNumber) {
+  return new Promise(async (resolve) => {
+    const issue = await jira.findIssue(issueNumber);
+    resolve(issue);
+  })
+    .then((issue) => {
+      console.log("Summary: " + issue.fields.summary);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 const titles = [
   "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
   "Create index.html with basic html markup and perform first commit",
@@ -45,8 +85,10 @@ class JiraHandler {
     this.links = links;
     this.titles = titles;
     this.jirasObject = [];
+    this.jiraTicketNumber = [];
     this.createJiraObject();
     this.fetchGitHubData();
+    this.getJiraInfo();
   }
   createJiraObject() {
     for (let index = 0; index < this.titles.length; index++) {
@@ -60,66 +102,36 @@ class JiraHandler {
   }
   async fetchGitHubData() {
     return new Promise(async (resolve) => {
-
-      const octokit = new Octokit({
-        auth: process.env.GITHUB_TOKEN,
+      const commits = await octokit.rest.repos.listCommits({
+        owner: "Mamutjan0909",
+        repo: "engineering-training",
       });
-      octokit.rest.repos.listCommits({
-        owner: "aindrokov",
-        repo: "Engineering-Training",
-      })
-        .then((response) => {
-          let jiraTicketNumber = [];
-          const regex = /([A-Z][A-Z0-9]+-[0-9]+)/g;
-          for (let index = 0; index < response.data.length; index++) {
-            let ticketNumber = response.data[index].commit.message.match(regex);
-            let i = jiraTicketNumber.indexOf(ticketNumber);
+      resolve(commits);
+    });
+  }
+  getJiraInfo() {
+    this.fetchGitHubData().then((listMyCommits) => {
+      let jiraTicketNumber = [];
+      const regex = /([A-Z][A-Z0-9]+-[0-9]+)/g;
+      for (let index = 0; index < listMyCommits.data.length; index++) {
+        let ticketNumber =
+          listMyCommits.data[index].commit.message.match(regex);
+        let indx = jiraTicketNumber.indexOf(ticketNumber);
 
-            if (ticketNumber !== null && i === -1) {
-              jiraTicketNumber.push(ticketNumber);
-            } else {
-              console.log(jiraTicketNumber + " Jira ticket duplicates");
-            }
-          }
-          console.log(jiraTicketNumber);
-        })
-    })
+        if (ticketNumber !== null && indx === -1) {
+          jiraTicketNumber.push(ticketNumber);
+        } else {
+          console.log(jiraTicketNumber + " Jira ticket duplicates");
+        }
+      }
+      console.log(jiraTicketNumber);
+
+      for (let i = 0; i < jiraTicketNumber.length; i++) {
+        getStatus(jiraTicketNumber[i]);
+      }
+    });
   }
 }
 
 const jiraHandler = new JiraHandler(links, titles);
-
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
-  baseUrl: 'https://api.github.com',
-  log: {
-    debug: () => { },
-    info: () => { },
-    warn: console.warn,
-    error: console.error
-  },
-  request: {
-    agent: undefined,
-    fetch: undefined,
-    timeout: 0
-  }
-});
-
-var jira = new JiraApi({
-  protocol: 'https',
-  host: 'totalwine.atlassian.net',
-  username: process.env.JIRA_USERNAME,
-  password: process.env.JIRA_TOKEN,
-  apiVersion: '2',
-  strictSSL: true
-});
-
-jira.findIssue("DIG-72462")
-  .then(function (issue) {
-    console.log('Status: ' + issue.fields.status.name);
-  })
-  .catch(function (err) {
-    console.log(err, Object.keys(err));
-  });
-
 module.exports = jiraHandler;
